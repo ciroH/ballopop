@@ -12,11 +12,11 @@ public class DataCandidate {
 		Candidate candidate;
 		LinkedList<Candidate> list = new LinkedList<>();
 		String query = "select * from candidates";
-		PreparedStatement getAllStatement = null;
+		PreparedStatement getAllStmt = null;
 		ResultSet rs = null;
 		try {
-			getAllStatement = DbConnector.getInstance().getConn().prepareStatement(query);
-			rs = getAllStatement.executeQuery();
+			getAllStmt = DbConnector.getInstance().getConn().prepareStatement(query);
+			rs = getAllStmt.executeQuery();
 			
 			while (rs!=null && rs.next()) {
 				candidate = new Candidate(rs.getString("name"));
@@ -34,8 +34,8 @@ public class DataCandidate {
 				if (rs!=null) {
 					rs.close();
 				}
-				if (getAllStatement!=null) {
-					getAllStatement.close();
+				if (getAllStmt!=null) {
+					getAllStmt.close();
 				}
 				DbConnector.getInstance().releaseConn();
 			} catch (SQLException e2) {
@@ -46,6 +46,22 @@ public class DataCandidate {
 	return list;
 	}
 	
-
+	public boolean add(Candidate newCandidate) {
+		PreparedStatement addStmt = null;
+	/*
+	 * if(!verifyCandidate(newCandidate)){
+	 * 	return false;
+	 * }	
+	 */
+	try {
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		
+	}
+		
+	return true;
+	}
 	
 }
