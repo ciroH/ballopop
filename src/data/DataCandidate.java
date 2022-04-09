@@ -24,6 +24,7 @@ public class DataCandidate {
 				candidate.setParty(rs.getString("party"));
 				candidate.setPhoto(rs.getString("photo"));
 				candidate.setVotes(rs.getInt("votes"));
+				list.add(candidate);
 			}			
 			
 		} catch (SQLException e) {
@@ -45,5 +46,6 @@ public class DataCandidate {
 	return list;
 	}
 	
+
 	
 }
