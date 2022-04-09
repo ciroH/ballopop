@@ -39,7 +39,7 @@ public class Candidate extends BaseEntity{
 		return votes;
 	}
 	
-	private void setVotes(int votes) {
+	public void setVotes(int votes) {
 		this.votes = votes;
 	}
 	
