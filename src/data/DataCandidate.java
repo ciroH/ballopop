@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+
 import entities.Candidate;
 
 public class DataCandidate {
@@ -48,20 +49,81 @@ public class DataCandidate {
 	
 	public boolean add(Candidate newCandidate) {
 		PreparedStatement addStmt = null;
-	/*
-	 * if(!verifyCandidate(newCandidate)){
-	 * 	return false;
-	 * }	
-	 */
+		boolean addConfirmation = false;
 	try {
-		
+		 if(candidateExists(newCandidate)){
+			addConfirmation = false;
+		 } else {
+			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into candidate (name,votes,photo,party) values (?,?,?,?)");
+			 addStmt.setString(1, newCandidate.getName());
+			 addStmt.setInt(2, newCandidate.getVotes());
+			  
+			 if (!newCandidate.getPhoto().isEmpty() && !newCandidate.getParty().isEmpty()) {
+			  addStmt.setString(3, newCandidate.getPhoto());
+			  addStmt.setString(4, newCandidate.getParty());
+			
+			  } else if (!newCandidate.getPhoto().isEmpty()){
+			 addStmt.setString(3, newCandidate.getPhoto());
+			 addStmt.setNull(4, java.sql.Types.VARCHAR);
+			
+			  } else if (!newCandidate.getParty().isEmpty()) {
+			 addStmt.setString(4, newCandidate.getParty());
+		     addStmt.setNull(3, java.sql.Types.VARCHAR);	
+			
+			  } else {
+			 addStmt.setNull(3, java.sql.Types.VARCHAR);
+			 addStmt.setNull(4, java.sql.Types.VARCHAR);
+			}
+			addStmt.executeUpdate();
+			addConfirmation = true;
+		 }		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
-		
+		try {
+			if (addStmt!=null) {
+				addStmt.close();
+			}
+			DbConnector.getInstance().releaseConn();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 	}
 		
-	return true;
+	return addConfirmation;
+}
+	
+	public boolean candidateExists(Candidate entry) throws SQLException { //returns true if candidate with the same name as entry.getName() exists in database
+		boolean response;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			statement = DbConnector.getInstance().getConn().prepareStatement("select id from candidate where name=?");
+			statement.setString(1, entry.getName());
+			rs = statement.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				response = true;
+			} else {
+				response = false;
+			}
+			
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (rs!=null) {
+					rs.close();
+				}
+				if (statement!=null) {
+					statement.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				throw e2;
+			}
+		}		
+	return response;
 	}
 	
 }

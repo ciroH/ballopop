@@ -9,6 +9,8 @@ public class Candidate extends BaseEntity{
 	public Candidate(String name) {
 		setVotes(0);
 		this.setName(name);
+		this.setParty(null);
+		this.setPhoto(null);
 	}
 	
 	public String getName() {
