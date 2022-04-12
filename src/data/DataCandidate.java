@@ -126,4 +126,10 @@ public class DataCandidate {
 	return response;
 	}
 	
+	public boolean modify(Candidate candidate) {
+		
+	
+	return true;
+	}
+	
 }
