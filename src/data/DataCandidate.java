@@ -163,9 +163,29 @@ public class DataCandidate {
 	}
 	
 	public boolean delete(Candidate candidate) {
-	
-		
-	return true;
+		PreparedStatement deleteStmt = null;
+		boolean deleteConfirmation = false;
+		try {
+			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE candidate WHERE id=?");
+			
+			deleteStmt.setInt(1, candidate.getId());
+			
+			deleteStmt.executeQuery();
+			deleteConfirmation = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (deleteStmt!=null) {
+					deleteStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	return deleteConfirmation;
 	}
 	
 }
