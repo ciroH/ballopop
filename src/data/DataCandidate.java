@@ -134,16 +134,32 @@ public class DataCandidate {
  * if the need of a fully concurrent implementation of this method arises, just including an if(CandidateExists()) should be enough.
  */
 		PreparedStatement modifyStmt = null;
+		boolean modifyConfirmation = false;
 		try {
-			modifyStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET name=?, party=?, photo=?, votes=? WHERE id=?");
+			modifyStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET name=?, party=?, photo=? WHERE id=?");
+			
+			modifyStmt.setString(1, candidate.getName());
+			modifyStmt.setString(2, candidate.getParty());
+			modifyStmt.setString(3, candidate.getPhoto());
+			
+			modifyStmt.setInt(4, candidate.getId());
+			
+			modifyStmt.executeQuery();
+			modifyConfirmation = true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				if (modifyStmt!=null) {
+					modifyStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
 		}
-	
-	return true;
+	return modifyConfirmation;
 	}
 	
 }
