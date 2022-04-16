@@ -195,7 +195,34 @@ public class DataCandidate {
 	}
 	
 	public int getVotes(int id) {
-		int votes;
+		int votes = -1;
+		
+		PreparedStatement getVotesStmt = null;
+		ResultSet rs = null;
+		try {
+			getVotesStmt = DbConnector.getInstance().getConn().prepareStatement("SELECT candidate WHERE id=?");
+			getVotesStmt.setInt(1, id);
+			rs = getVotesStmt.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				votes = rs.getInt("votes");
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs!=null) {
+					rs.close();
+				}
+				if (getVotesStmt!=null) {
+					getVotesStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 	return votes;
 	}
