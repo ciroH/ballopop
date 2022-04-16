@@ -91,7 +91,7 @@ public class DataCandidate {
 	}
 		
 	return addConfirmation;
-}
+	}
 	
 	public boolean candidateExists(Candidate entry) throws SQLException { //returns true if candidate with the same name as entry.getName() exists in database
 		boolean response;
@@ -160,6 +160,12 @@ public class DataCandidate {
 			}
 		}
 	return modifyConfirmation;
+	}
+	
+	public boolean delete(Candidate candidate) {
+	
+		
+	return true;
 	}
 	
 }
