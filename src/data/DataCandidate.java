@@ -126,8 +126,22 @@ public class DataCandidate {
 	return response;
 	}
 	
-	public boolean modify(Candidate candidate) {
-		
+	public boolean modify(Candidate candidate) { 
+	
+/* 
+ * no need to verify the existence of a candidate, since the admin will be sending a valid and existing candidate to this method;
+ * the occurrence of another admin deleting a candidate before the execution of this method is very rare. 
+ * if the need of a fully concurrent implementation of this method arises, just including an if(CandidateExists()) should be enough.
+ */
+		PreparedStatement modifyStmt = null;
+		try {
+			modifyStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET name=?, party=?, photo=?, votes=? WHERE id=?");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
 	
 	return true;
 	}
