@@ -188,4 +188,16 @@ public class DataCandidate {
 	return deleteConfirmation;
 	}
 	
+	public boolean increaseVotes(Candidate candidate) {
+		boolean completedExecution = false;
+		
+	return completedExecution;
+	}
+	
+	public int getVotes(int id) {
+		int votes;
+		
+	return votes;
+	}
+	
 }
