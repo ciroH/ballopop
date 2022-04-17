@@ -189,7 +189,32 @@ public class DataCandidate {
 	}
 	
 	public boolean increaseVotes(Candidate candidate) {
+		PreparedStatement votesStmt = null;
 		boolean completedExecution = false;
+		try {
+			
+			int votes = getVotes(candidate.getId());
+			votesStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET votes=? WHERE id=?");
+			
+			votesStmt.setInt(1, votes);
+			
+			votesStmt.setInt(2, candidate.getId());
+			
+			votesStmt.executeQuery();
+			completedExecution = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (votesStmt!=null) {
+					votesStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 	return completedExecution;
 	}
