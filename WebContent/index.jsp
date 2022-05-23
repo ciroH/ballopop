@@ -20,16 +20,11 @@
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><img class="logo" src="assets/img/ballopop-logo.svg"></div>
             <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="DNI"></div>
-            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Nro. de Trámite"></div>  
+            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Nro. de Trámite"></div>   
+       		<input name="isAdmin" type="hidden" <%if(adminPriv){ %>value="admin"<% }else { %> value="user"<% } %>>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log In</button></div>
         </form>
-        <form action="login" method="post">
-      <%if(adminPriv){ %> 
-        <input name="isAdmin" type="hidden" value="admin">
-        <button class="btn btn-primary d-block w-200" type="submit">Back to user Login</button>
-      <% } %>
-        </form>
-    </section>
+     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
