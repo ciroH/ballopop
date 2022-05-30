@@ -81,3 +81,11 @@ ballopop-logo.svg {
   filter: invert(100%) sepia(7%) saturate(228%) hue-rotate(337deg) brightness(112%) contrast(82%);
 }
 
+.voting-main {
+  background: url("../../assets/img/letters-gray.jpg");
+  background-size: cover;
+  background-repeat: repeat;
+  position: relative;
+  height: 100%;
+}
+
