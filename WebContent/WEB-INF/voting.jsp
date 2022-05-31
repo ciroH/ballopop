@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../assets/css/Login-Form_Dark.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
 </head>
 <body>
-	<div class="voting-main">
-	<div class="container">
-<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+	<section class="voting-main">
+	<p> test </p>
+<!--<div class="container">
+<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4 row-cols-transparent">
 	<div class="col">
 		<div class="card radius-15">
 			<div class="card-body text-center">
@@ -83,9 +83,8 @@
 		</div>
 	</div>
 </div>
-</div>
-	</div>
+</div>	-->
+	</section>
 	
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
