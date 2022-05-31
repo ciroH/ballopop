@@ -38,9 +38,10 @@ public class LogIn extends HttpServlet {
 		if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("admin")) {
 			
 		} else if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("user")) {
-		 LinkedList<Candidate> candidateList = new LinkedList<>();	
+		/* LinkedList<Candidate> candidateList = new LinkedList<>();	
 		 candidateList = logicCandidate.getCandidates();
-
+		*/
+		request.getRequestDispatcher("WEB-INF/voting.jsp").forward(request, response);
 		} else {
 			//redirect to error message
 		}
