@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Candidate;
 import logic.LogicCandidate;
 
-/**
+/*
  * Servlet implementation class LogIn
  */
 @WebServlet({ "/LogIn", "/login" })
@@ -29,7 +29,7 @@ public class LogIn extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Go back to index, you should not be here");
+		response.getWriter().append("Go back to index, you shouldn't be here");
 	}
 
 	
