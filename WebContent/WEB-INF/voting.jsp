@@ -5,86 +5,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Select your favorite Candidate</title>
-    <link rel="stylesheet" href="../assets/css/Login-Form_Dark.css">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/styles.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Animated-List.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
-	<section class="voting-main">
-	<p> test </p>
-<!--<div class="container">
-<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4 row-cols-transparent">
-	<div class="col">
-		<div class="card radius-15">
-			<div class="card-body text-center">
-				<div class="p-4 border radius-15">
-					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="110" height="110" class="rounded-circle shadow" alt="">
-					<h5 class="mb-0 mt-5">Pauline I. Bird</h5>
-					<p class="mb-3">Webdeveloper</p>
-					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
-					</div>
-					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Contact Me</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col">
-		<div class="card radius-15">
-			<div class="card-body text-center">
-				<div class="p-4 border radius-15">
-					<img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="110" height="110" class="rounded-circle shadow" alt="">
-					<h5 class="mb-0 mt-5">Ralph L. Alva</h5>
-					<p class="mb-3">UI Developer</p>
-					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
-					</div>
-					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Contact Me</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col">
-		<div class="card radius-15">
-			<div class="card-body text-center">
-				<div class="p-4 border radius-15">
-					<img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="110" height="110" class="rounded-circle shadow" alt="">
-					<h5 class="mb-0 mt-5">John B. Roman</h5>
-					<p class="mb-3">Graphic Designer</p>
-					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
-					</div>
-					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Contact Me</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col">
-		<div class="card radius-15">
-			<div class="card-body text-center">
-				<div class="p-4 border radius-15">
-					<img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="110" height="110" class="rounded-circle shadow" alt="">
-					<h5 class="mb-0 mt-5">David O. Buckley</h5>
-					<p class="mb-3">Android Developer</p>
-					<div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
-						<a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
-					</div>
-					<div class="d-grid"> <a href="#" class="btn btn-outline-primary radius-15">Contact Me</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</div>	-->
-	</section>
-	
+    <section class="voting-main" style="background: url(&quot;${pageContext.request.contextPath}/assets/img/letters-gray.png&quot;);">
+        <div class="container">
+            <div class="row product-list dev">
+                <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
+                    <div class="product-container bg-transparent">
+                        <div class="row">
+                            <div class="col-md-12"><img class="rounded-circle img-fluid. max-width:100% mx-auto d-block" src="../assets/img/marcus-aurelius.jpg" width="200" height="200" alt="Marcus Aurelius"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="candidate-name text-center">Marcus Aurelius</h1>
+                            </div>
+                        </div>
+                        <div class="product-rating"></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="product-description text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
+                                <div class="row">
+                                    <div class="col">
+                                    	<form action="" method="post">
+                                    		<input type="hidden" value="">
+                                    		<input type="image" class="select-button img-fluid max-width:100% d-block float mx-auto" src="${pageContext.request.contextPath}/assets/img/select-button.jpg">
+                                    	</form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/Animated-List.js"></script>
 </body>
 </html>
