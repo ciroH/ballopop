@@ -1,0 +1,30 @@
+.voting-main {
+  background: url("../../assets/img/letters-gray.jpg");
+  height: 1200px;
+  position: relative;
+}
+
+.product-container {
+  background-color: rgba(0,0,0,0);
+  opacity: 1;
+}
+
+div {
+  background-color: rgba(0,0,0,0.0);
+}
+
+.product-container {
+  background-color: rgba(255,0,0,0);
+}
+
+.product-item.animation-element.slide-top-left {
+  background-color: rgba(0,0,0,0.0);
+}
+
+div {
+  background-color: rgba(0,0,0,0.0);
+}
+
+div {
+}
+
