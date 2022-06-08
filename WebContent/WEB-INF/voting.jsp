@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
 </head>
 <body>
-    <section class="voting-main" style="background: url(&quot;${pageContext.request.contextPath}/assets/img/letters-gray.png&quot;);">
+    <section class="voting-main" style="background: url(&quot;${pageContext.request.contextPath}/assets/img/letters-gray.jpg&quot;);">
         <div class="container">
             <div class="row product-list dev">
                 <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                     <div class="product-container bg-transparent">
                         <div class="row">
-                            <div class="col-md-12"><img class="rounded-circle img-fluid. max-width:100% mx-auto d-block" src="../assets/img/marcus-aurelius.jpg" width="200" height="200" alt="Marcus Aurelius"></div>
+                            <div class="col-md-12"><img class="rounded-circle img-fluid. max-width:100% mx-auto d-block" src="${pageContext.request.contextPath}/assets/img/marcus-aurelius.jpg" width="200" height="200" alt="Marcus Aurelius"></div>
                         </div>
                         <div class="row">
                             <div class="col">
