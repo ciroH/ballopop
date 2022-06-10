@@ -4,6 +4,7 @@ public class Candidate extends BaseEntity{
 	String name;
 	String party;
 	String photo;
+	String description;
 	int votes;
 	
 	public Candidate(String name) {
@@ -44,7 +45,14 @@ public class Candidate extends BaseEntity{
 	public void setVotes(int votes) {
 		this.votes = votes;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	
 }
