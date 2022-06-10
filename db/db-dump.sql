@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: ballopop
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.29-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS `candidate`;
 CREATE TABLE `candidate` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
   `party` varchar(30) DEFAULT NULL,
   `photo` varchar(10000) DEFAULT NULL,
   `votes` int unsigned NOT NULL,
@@ -97,4 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-04 18:13:10
+-- Dump completed on 2022-06-10 18:14:40
