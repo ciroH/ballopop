@@ -1,3 +1,6 @@
+<%@page import="entities.Candidate"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.util.concurrent.LinkedBlockingDeque"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,11 +11,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Animated-List.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
+    
+    <%  LinkedList<Candidate> candidateList = new LinkedList;
+   		candidateList = (LinkedList<Candidate>)request.getAttribute("candidates");
+   		int listSize = candidateList.size();
+   	%>
 </head>
 <body>
     <section class="voting-main" style="background: url(&quot;${pageContext.request.contextPath}/assets/img/letters-gray.jpg&quot;);">
         <div class="container">
             <div class="row product-list dev">
+            <% for(int i=0 ; i < listsize ; i++){ %>
                 <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                     <div class="product-container bg-transparent">
                         <div class="row">
@@ -39,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+               <% } %> 
             </div>
         </div>
     </section>
