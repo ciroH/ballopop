@@ -51,9 +51,9 @@ CREATE TABLE `candidate` (
   `description` varchar(200) DEFAULT NULL,
   `party` varchar(30) DEFAULT NULL,
   `photo` varchar(10000) DEFAULT NULL,
-  `votes` int unsigned NOT NULL,
+  `votes` int unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
+INSERT INTO `candidate` VALUES (1,'Marcus Aurelius','Last emperor of the Pax Romana. Served as Roman consul in 140, 145, and 161. Holded hold the Empire together through Roman Empire´s first true pandemic, the Parthian War, and the Germanic Wars.',NULL,'https://i.imgur.com/vz7vR8h.jpg',0);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,4 +99,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-10 18:14:40
+-- Dump completed on 2022-06-13 12:32:42
