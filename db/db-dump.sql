@@ -62,7 +62,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,'Marcus Aurelius','Last emperor of the Pax Romana. Served as Roman consul in 140, 145, and 161. Holded hold the Empire together through Roman Empire´s first true pandemic, the Parthian War, and the Germanic Wars.',NULL,'https://i.imgur.com/vz7vR8h.jpg',0);
+INSERT INTO `candidate` VALUES (1,'Marcus Aurelius','Last emperor of the Pax Romana. Served as Roman consul in 140, 145, and 161. Holded the Empire together through Roman Empire´s first true pandemic, the Parthian War, and the Germanic Wars.',NULL,'https://i.imgur.com/vz7vR8h.jpg',0);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
