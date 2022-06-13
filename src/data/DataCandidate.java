@@ -12,7 +12,7 @@ public class DataCandidate {
 	public LinkedList<Candidate> getAll(){
 		Candidate candidate;
 		LinkedList<Candidate> list = new LinkedList<>();
-		String query = "select * from candidates";
+		String query = "select * from candidate";
 		PreparedStatement getAllStmt = null;
 		ResultSet rs = null;
 		try {
