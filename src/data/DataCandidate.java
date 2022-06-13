@@ -25,6 +25,7 @@ public class DataCandidate {
 				candidate.setParty(rs.getString("party"));
 				candidate.setPhoto(rs.getString("photo"));
 				candidate.setVotes(rs.getInt("votes"));
+				candidate.setDescription(rs.getString("description"));
 				list.add(candidate);
 			}			
 			
@@ -54,7 +55,7 @@ public class DataCandidate {
 		 if(candidateExists(newCandidate)){
 			addConfirmation = false;
 		 } else {
-			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into candidate (name,votes,photo,party) values (?,?,?,?)");
+			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into candidate (name,votes,photo,party,description) values (?,?,?,?,?)");
 			 addStmt.setString(1, newCandidate.getName());
 			 addStmt.setInt(2, newCandidate.getVotes());
 			  
@@ -74,6 +75,12 @@ public class DataCandidate {
 			 addStmt.setNull(3, java.sql.Types.VARCHAR);
 			 addStmt.setNull(4, java.sql.Types.VARCHAR);
 			}
+			 if (!newCandidate.getDescription().isEmpty()) {
+				 addStmt.setString(5, newCandidate.getDescription());
+			} else {
+				addStmt.setNull(5, java.sql.Types.VARCHAR);
+			}
+			 
 			addStmt.executeUpdate();
 			addConfirmation = true;
 		 }		
@@ -136,13 +143,14 @@ public class DataCandidate {
 		PreparedStatement modifyStmt = null;
 		boolean modifyConfirmation = false;
 		try {
-			modifyStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET name=?, party=?, photo=? WHERE id=?");
+			modifyStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET name=?, party=?, photo=?, description=? WHERE id=?");
 			
 			modifyStmt.setString(1, candidate.getName());
 			modifyStmt.setString(2, candidate.getParty());
 			modifyStmt.setString(3, candidate.getPhoto());
+			modifyStmt.setString(4, candidate.getDescription());
 			
-			modifyStmt.setInt(4, candidate.getId());
+			modifyStmt.setInt(5, candidate.getId());
 			
 			modifyStmt.executeQuery();
 			modifyConfirmation = true;
