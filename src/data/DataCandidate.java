@@ -196,21 +196,22 @@ public class DataCandidate {
 	return deleteConfirmation;
 	}
 	
-	public boolean increaseVotes(Candidate candidate) {
+	public boolean increaseVotes(int candidateId) {
 		PreparedStatement votesStmt = null;
 		boolean completedExecution = false;
 		try {
+			int votes = getVotes(candidateId);
+			if(votes >= 0) {
 			
-			int votes = getVotes(candidate.getId());
-			votesStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET votes=? WHERE id=?");
+				votesStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET votes=? WHERE id=?");
 			
-			votesStmt.setInt(1, votes);
+				votesStmt.setInt(1, votes);
 			
-			votesStmt.setInt(2, candidate.getId());
+				votesStmt.setInt(2, candidateId);
 			
-			votesStmt.executeQuery();
-			completedExecution = true;
-			
+				votesStmt.executeQuery();
+				completedExecution = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
