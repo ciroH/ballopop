@@ -234,7 +234,7 @@ public class DataCandidate {
 		PreparedStatement getVotesStmt = null;
 		ResultSet rs = null;
 		try {
-			getVotesStmt = DbConnector.getInstance().getConn().prepareStatement("SELECT candidate WHERE id=?");
+			getVotesStmt = DbConnector.getInstance().getConn().prepareStatement("SELECT votes FROM candidate WHERE id=?");
 			getVotesStmt.setInt(1, id);
 			rs = getVotesStmt.executeQuery();
 			
