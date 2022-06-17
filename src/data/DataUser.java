@@ -15,6 +15,8 @@ public class DataUser {
 		ResultSet rs = null;
 		try {
 			LogInStmt = DbConnector.getInstance().getConn().prepareStatement(query);
+			LogInStmt.setInt(1, credentials.getId());
+			LogInStmt.setString(2, credentials.getPassword());
 			rs = LogInStmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
