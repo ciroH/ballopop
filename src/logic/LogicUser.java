@@ -15,4 +15,10 @@ public class LogicUser {
 		return validatedUser;
 	}
 
+	public boolean vote(User credentials, int candidateId) {
+		DataUser dataUser = new DataUser();
+		
+		return dataUser.markVote(credentials, candidateId);
+		
+	}	
 }
