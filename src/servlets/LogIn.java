@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Candidate;
+import entities.User;
 import logic.LogicCandidate;
+import logic.LogicUser;
 
 /*
  * Servlet implementation class LogIn
@@ -19,17 +21,16 @@ import logic.LogicCandidate;
 public class LogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        LogicCandidate logicCandidate;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+       LogicUser logicUser;
     public LogIn() {
         super();
         logicCandidate = new LogicCandidate();
+        logicUser = new LogicUser();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Go back to index, you shouldn't be here");
+		forwardToIndex(request, response);
 	}
 
 	
@@ -38,15 +39,34 @@ public class LogIn extends HttpServlet {
 		if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("admin")) {
 			
 		} else if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("user")) {
-		LinkedList<Candidate> candidateList = new LinkedList<>();	
-		candidateList = logicCandidate.getCandidates();
-		request.setAttribute("candidates", candidateList);
-		request.getRequestDispatcher("WEB-INF/voting.jsp").forward(request, response);
-		} else {
-			//redirect to error message
+		
+		if(!request.getParameter("id").isBlank() && !request.getParameter("password").isEmpty()) {
+			int key = Integer.parseInt(request.getParameter("id"));
+			String password = request.getParameter("password");
+			User user = logicUser.validateLogIn(key, password);
+			if(user != null && !user.hasVoted()) {
+				LinkedList<Candidate> candidateList = new LinkedList<>();	
+				candidateList = logicCandidate.getCandidates();
+				request.setAttribute("candidates", candidateList);
+				request.setAttribute("credentials", user);
+				request.getRequestDispatcher("WEB-INF/voting.jsp").forward(request, response);
+			} else if(user == null) {
+				request.setAttribute("warning","invalid user");
+				forwardToIndex(request, response);
+				} else if (user.hasVoted()) {
+					request.setAttribute("warning","user has already voted");
+					forwardToIndex(request, response);
+					} else {
+						forwardToIndex(request, response);
+					}
+		 } else forwardToIndex(request, response);
 		}
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	private void forwardToIndex(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
