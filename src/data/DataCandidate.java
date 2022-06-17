@@ -209,7 +209,7 @@ public class DataCandidate {
 			
 				votesStmt.setInt(2, candidateId);
 			
-				votesStmt.executeQuery();
+				votesStmt.executeUpdate(); //should i check the row count?
 				completedExecution = true;
 			}
 		} catch (SQLException e) {
