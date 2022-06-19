@@ -202,11 +202,9 @@ public class DataCandidate {
 		try {
 			int votes = getVotes(candidateId);
 			if(votes >= 0) {
-			
 				votesStmt = DbConnector.getInstance().getConn().prepareStatement("UPDATE candidate SET votes=? WHERE id=?");
-			
+				votes++;
 				votesStmt.setInt(1, votes);
-			
 				votesStmt.setInt(2, candidateId);
 			
 				votesStmt.executeUpdate(); //should i check the row count?

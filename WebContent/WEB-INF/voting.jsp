@@ -1,9 +1,10 @@
+<%@page import="entities.User"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="javax.annotation.processing.SupportedAnnotationTypes"%>
 <%@page import="entities.Candidate"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.concurrent.LinkedBlockingDeque"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
     
     <% 	LinkedList<Candidate> candidateList = new LinkedList();
    		candidateList = (LinkedList<Candidate>)request.getAttribute("candidates");
+   		User user = (User)request.getAttribute("credentials");
    	%>
 </head>
 <body>
@@ -40,8 +42,10 @@
                                 <p class="product-description text-center"> <%= candidate.getDescription() %> </p>
                                 <div class="row">
                                     <div class="col">
-                                    	<form action="" method="post">
-                                    		<input name="id"  type="hidden" value="<%= candidate.getId() %>">
+                                    	<form action="vote" method="post">
+                                    		<input name="candidateId"  type="hidden" value="<%= candidate.getId() %>">
+                                    		<input name="userId" type="hidden" value="<%= user.getId() %>">
+                                    		<input name="userPassword" type="hidden" value="<%= user.getPassword() %>">
                                     		<input type="image" class="select-button img-fluid max-width:100% d-block float mx-auto" src="${pageContext.request.contextPath}/assets/img/select-button.jpg">
                                     	</form>
                                     </div>
