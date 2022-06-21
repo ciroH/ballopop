@@ -71,4 +71,70 @@ public class DataUser {
 		return voteConfirmation;
 	}
 	
+	public boolean add(User newUser) {
+		PreparedStatement addStmt = null;
+		boolean addConfirmation = false;
+	try {
+		 if(userExists(newUser) || newUser.getPassword().isBlank()){
+			addConfirmation = false;
+		 } else {
+			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into user (id,password) values (?,?)");
+			 addStmt.setInt(1, newUser.getId());
+			 addStmt.setString(2, newUser.getPassword());
+			 
+			addStmt.executeUpdate();
+			addConfirmation = true;
+		 }		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (addStmt!=null) {
+				addStmt.close();
+			}
+			DbConnector.getInstance().releaseConn();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
+		
+	return addConfirmation;
+	}
+
+	public boolean userExists(User entry) throws SQLException { //returns true if candidate with the same name as entry.getName() exists in database
+		boolean response;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			statement = DbConnector.getInstance().getConn().prepareStatement("select id from user where id=? and password=?");
+			statement.setInt(1,entry.getId());
+			statement.setString(2,entry.getPassword());
+			rs = statement.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				response = true;
+			} else {
+				response = false;
+			}
+			
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (rs!=null) {
+					rs.close();
+				}
+				if (statement!=null) {
+					statement.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				throw e2;
+			}
+		}		
+	return response;
+	}
+
+	
+	
 }

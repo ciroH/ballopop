@@ -43,6 +43,7 @@ public class Vote extends HttpServlet {
 		}
 		if (candidateExists && userExists) {
 			if (logicUser.vote(credentials, candidateId)) {
+				//TODO: Implement logOut call
 				forwardToIndex(request, response);	
 			} else {
 				request.setAttribute("warning", "server error, try again");

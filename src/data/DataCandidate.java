@@ -52,7 +52,7 @@ public class DataCandidate {
 		PreparedStatement addStmt = null;
 		boolean addConfirmation = false;
 	try {
-		 if(candidateExists(newCandidate)){
+		 if(candidateExists(newCandidate) || newCandidate.getName().isBlank()){
 			addConfirmation = false;
 		 } else {
 			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into candidate (name,votes,photo,party,description) values (?,?,?,?,?)");
