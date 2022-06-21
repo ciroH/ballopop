@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import entities.Candidate;
 import entities.User;
 
 public class DataUser {
@@ -135,6 +136,31 @@ public class DataUser {
 	return response;
 	}
 
-	
+	public boolean delete(User user) {
+		PreparedStatement deleteStmt = null;
+		boolean deleteConfirmation = false;
+		try {
+			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE user WHERE id=?");
+			
+			deleteStmt.setInt(1, user.getId());
+			
+			deleteStmt.executeQuery();
+			deleteConfirmation = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (deleteStmt!=null) {
+					deleteStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	return deleteConfirmation;
+	}
+
 	
 }
