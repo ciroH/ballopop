@@ -22,16 +22,15 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse d-xxl-flex justify-content-end justify-content-xxl-end" id="navcol-1">
                     <ul class="navbar-nav">
-                        <li class="nav-item"></li>
-                        <li class="nav-item"></li>
-                        <li class="nav-item" style="color: rgb(255,255,255);"><a class="nav-link" href="#" style="background: rgba(0,0,0,0.52);color: rgb(242,242,242);">Admin Login</a></li>
+                        <li class="nav-item" style="color: rgb(255,255,255);"><a class="nav-link" href="#" style="background: rgba(0,0,0,0.52);color: rgb(242,242,242);">
+                        <% if(!adminPriv){ %>Admin Login <% }else { %> User Login <% } %></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <form action="login" method="post">
             <h2 class="visually-hidden">Login Form</h2>
-            <div class="illustration"><img class="logo" src="assets/img/ballopop-logo.svg"></div>
+			<div class="illustration"><img class="logo" <% if(!adminPriv){ %> src="assets/img/ballopop-logo.svg" <% }else{ %> src="assets/img/ballopop-logo-admin.svg" <% } %>></div>
             <div class="mb-3"><input class="form-control" type="number" name="id" placeholder="DNI" max="99999999" maxlength="8"></div>
             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Nro. de Trámite"></div>   
        		<input name="isAdmin" type="hidden" <%if(adminPriv){ %>value="admin"<% }else { %> value="user"<% } %>>
