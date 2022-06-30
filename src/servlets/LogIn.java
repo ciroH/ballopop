@@ -36,9 +36,9 @@ public class LogIn extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("admin")) {
+		if (request.getParameter("userType") != null && request.getParameter("userType").equals("admin")) {
 			
-		} else if (request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("user")) {
+		} else if (request.getParameter("userType") != null && request.getParameter("userType").equals("user")) {
 		
 		if(!request.getParameter("id").isBlank() && !request.getParameter("password").isEmpty()) {
 			int key = Integer.parseInt(request.getParameter("id"));

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <% String warning = (String)request.getAttribute("warning"); 
        boolean adminPriv = false;
-       if(request.getParameter("isAdmin") != null && request.getParameter("isAdmin").equals("admin")){
+       if(request.getParameter("userType") != null && request.getParameter("userType").equals("admin")){
      		adminPriv = true;
         } %>
 </head>
