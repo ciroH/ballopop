@@ -29,6 +29,15 @@ public class LogIn extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (true /*!request.getParameter("userType").isBlank()*/) {
+			String userType = "";
+			if (request.getParameter("userType").equals("user")) {
+				userType = "admin";
+			} else if(request.getParameter("userType").equals("admin")) {
+				userType = "user";
+			}			
+			request.setAttribute("userType", userType);
+		}
 		
 		forwardToIndex(request, response);
 	}

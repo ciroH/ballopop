@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <% String warning = (String)request.getAttribute("warning"); 
+       String userType = (String)request.getAttribute("userType");
        boolean adminPriv = false;
-       if(request.getParameter("userType") != null && request.getParameter("userType").equals("admin")){
+       if(userType != null && userType.equals("admin")){
      		adminPriv = true;
         } %>
 </head>
@@ -22,8 +23,10 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse d-xxl-flex justify-content-end justify-content-xxl-end" id="navcol-1">
                     <ul class="navbar-nav">
-                        <li class="nav-item" style="color: rgb(255,255,255);"><a class="nav-link" href="#" style="background: rgba(0,0,0,0.52);color: rgb(242,242,242);">
-                        <% if(!adminPriv){ %>Admin Login <% }else { %> User Login <% } %></a></li>
+                        <li class="nav-item" style="color: rgb(255,255,255);">
+          					<a class="nav-link" <% if(!adminPriv){ %> href="login?userType=user" <% }else { %> href="login?userType=admin" <% } %> style="background: rgba(0,0,0,0.52);color: rgb(242,242,242);">
+                       	 <% if(!adminPriv){ %>Admin Login <% }else { %> User Login <% } %></a>
+                        </li>
                     </ul>
                 </div>
             </div>
