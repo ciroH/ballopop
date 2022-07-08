@@ -34,8 +34,8 @@
         <form action="login" method="post">
             <h2 class="visually-hidden">Login Form</h2>
 			<div class="illustration"><img class="logo" <% if(!adminPriv){ %> src="assets/img/ballopop-logo.svg" <% }else{ %> src="assets/img/ballopop-logo-admin.svg" <% } %>></div>
-            <div class="mb-3"><input class="form-control" type="number" name="id" placeholder="DNI" max="99999999" maxlength="8"></div>
-            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Nro. de Trámite"></div>   
+            <div class="mb-3"><input class="form-control" type="number" name="id" <% if(adminPriv){ %>placeholder="ID"<% }else { %>placeholder="DNI" <% } %> max="99999999" maxlength="8"></div>
+            <div class="mb-3"><input class="form-control" type="password" name="password" <% if(adminPriv){ %>placeholder="Password" <% } else{ %>  placeholder="Nro. de Trámite" <% } %> ></div>   
        		<input name="userType" type="hidden" <%if(adminPriv){ %>value="admin"<% }else { %> value="user"<% } %>>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Log In</button></div>
             <% if(warning!= null && !warning.isBlank()){ %> <h6 class="alert alert-info text-center"> <% out.print(warning); %> </h6> <% } %>
