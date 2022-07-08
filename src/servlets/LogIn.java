@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Candidate;
 import entities.User;
+import logic.LogicAdmin;
 import logic.LogicCandidate;
 import logic.LogicUser;
 
@@ -22,14 +24,16 @@ public class LogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        LogicCandidate logicCandidate;
        LogicUser logicUser;
+       LogicAdmin logicAdmin;
     public LogIn() {
         super();
         logicCandidate = new LogicCandidate();
         logicUser = new LogicUser();
+        logicAdmin = new LogicAdmin();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (true /*!request.getParameter("userType").isBlank()*/) {
+		if (!request.getParameter("userType").isBlank()) {
 			String userType = "";
 			if (request.getParameter("userType").equals("user")) {
 				userType = "admin";
@@ -46,7 +50,28 @@ public class LogIn extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (request.getParameter("userType") != null && request.getParameter("userType").equals("admin")) {
-			
+			if(!request.getParameter("id").isBlank() && !request.getParameter("password").isEmpty()) {
+				int key = Integer.parseInt(request.getParameter("id"));
+				String password = request.getParameter("password");
+				String exceptionMessage = null;
+				boolean acceptedCredentials = false;
+				try {
+				acceptedCredentials = logicAdmin.validateLogIn(key, password);
+				} catch (SQLException e) {
+				exceptionMessage = e.getMessage();
+				} finally {
+					if (exceptionMessage != null) {
+						request.setAttribute("warning", exceptionMessage);
+						forwardToIndex(request, response);
+					} else if(acceptedCredentials){
+						request.setAttribute("adminID", key);
+						request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
+					} else {
+						request.setAttribute("warning", "invalid credentials");
+					}
+					
+				}
+			} else forwardToIndex(request, response);
 		} else if (request.getParameter("userType") != null && request.getParameter("userType").equals("user")) {
 		
 		if(!request.getParameter("id").isBlank() && !request.getParameter("password").isEmpty()) {

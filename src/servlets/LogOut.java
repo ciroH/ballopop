@@ -20,7 +20,6 @@ public class LogOut extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Illegal Access");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
