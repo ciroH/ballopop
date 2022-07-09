@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <% request.setAttribute("sessionID", request.getSession().getId()); %>
 </head>
-<body>
+<body style="background: #000000">
     <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
         <div class="container-fluid"><a class="nav-link" href="#" style="color: rgb(184,184,184);filter: blur(0px);">Back</a>
             <div class="collapse navbar-collapse d-xl-flex justify-content-xl-center" id="navcol-1">
@@ -34,13 +35,13 @@
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="#" style="color: rgb(183,183,183);">Candidates</a></td>
+                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=candidates" style="color: rgb(183,183,183);">Candidates</a></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="#" style="color: rgb(183,183,183);">Users</a></td>
+                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=users" style="color: rgb(183,183,183);">Users</a></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="#" style="color: rgb(183,183,183);">Stats</a></td>
+                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=stats" style="color: rgb(183,183,183);">Stats</a></td>
                             </tr>
                         </tbody>
                     </table>
