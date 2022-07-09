@@ -33,7 +33,7 @@ public class LogIn extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!request.getParameter("userType").isBlank()) {
+		if (request.getParameter("userType")!=null) {
 			String userType = "";
 			if (request.getParameter("userType").equals("user")) {
 				userType = "admin";
