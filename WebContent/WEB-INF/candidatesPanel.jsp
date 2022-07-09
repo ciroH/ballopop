@@ -53,6 +53,6 @@
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Animated-Pretty-Product-List-v12.js"></script>
+    <script src="assets/js/Animated-List.js"></script>
 </body>
 </html>
