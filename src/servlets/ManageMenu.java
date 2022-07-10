@@ -18,7 +18,7 @@ public class ManageMenu extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getAttribute("sessionID").toString()!=null) {
+		if (request.getAttribute("sessionID")!=null && (String)request.getAttribute("sessionID")==request.getSession().getId()) {
 			doPost(request, response);
 		} else {
 			request.getSession().invalidate();
