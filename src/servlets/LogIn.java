@@ -62,12 +62,15 @@ public class LogIn extends HttpServlet {
 				} finally {
 					if (exceptionMessage != null) {
 						request.setAttribute("warning", exceptionMessage);
+						request.setAttribute("userType", "admin");
 						forwardToIndex(request, response);
 					} else if(acceptedCredentials){
 						request.setAttribute("adminID", key);
 						request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
 					} else {
 						request.setAttribute("warning", "invalid credentials");
+						request.setAttribute("userType", "admin");
+						forwardToIndex(request, response);
 					}
 					
 				}
