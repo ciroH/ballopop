@@ -21,10 +21,8 @@ div {
   background-color: rgba(0,0,0,0.0);
 }
 
-div {
-  background-color: rgba(0,0,0,0.0);
+.btn-menu {
+  color: rgb(183,183,183);
+  background: rgb(0,0,0);
+  border-width: 0px;
 }
-
-div {
-}
-
