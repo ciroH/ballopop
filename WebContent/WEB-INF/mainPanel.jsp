@@ -6,9 +6,9 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Menu</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/Animated-List.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <% request.setAttribute("sessionID", request.getSession().getId()); %>
 </head>
 <body style="background: #000000">
@@ -35,13 +35,28 @@
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=candidates" style="color: rgb(183,183,183);">Candidates</a></td>
+                                <td style="text-align: center;">
+                                <form action="ManageMenu" method="post">
+                                	<input name="destination" type="hidden" value="candidates">
+                                	<button class="btn-menu" type="submit">Candidates</button>
+                                </form>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=users" style="color: rgb(183,183,183);">Users</a></td>
+                                <td style="text-align: center;">
+								<form action="ManageMenu" method="post">
+                                	<input name="destination" type="hidden" value="users">
+                                	<button class="btn-menu" type="submit">Users</button>
+                                </form>
+								</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center;">&nbsp;<a href="managemenu?destination=stats" style="color: rgb(183,183,183);">Stats</a></td>
+                                <td style="text-align: center;">
+								<form action="ManageMenu" method="post">
+                                	<input name="destination" type="hidden" value="stats">
+                                	<button class="btn-menu" type="submit">Stats</button>
+                                </form>
+								</td>
                             </tr>
                         </tbody>
                     </table>
