@@ -13,7 +13,11 @@
 </head>
 <body style="background: #000000">
     <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
-        <div class="container-fluid"><a class="nav-link" href="#" style="color: rgb(184,184,184);filter: blur(0px);">Back</a>
+        <div class="container-fluid">
+        <form action="LogOut" method="post">
+        	<input name="destination" type="hidden" value="menu">
+        	<button class="btn-menu" class="nav-link" style="color: rgb(184,184,184);filter: blur(0px);">Back</button>
+        </form>
             <div class="collapse navbar-collapse d-xl-flex justify-content-xl-center" id="navcol-1">
                 <ul class="navbar-nav">
                     <li class="nav-item"></li>
