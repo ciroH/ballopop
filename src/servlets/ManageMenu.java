@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,16 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Candidate;
+import entities.User;
+import logic.LogicUser;
+
 @WebServlet({ "/ManageMenu", "/managemenu" })
 public class ManageMenu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	ArrayList<User> userList = new ArrayList<>();
+	LinkedList<Candidate> candidateList = new LinkedList<>();
+	
     public ManageMenu() {
         super();
     }
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println((String)request.getAttribute("sessionID"));
+		System.out.println(request.getSession().getId());
+		
 		if (request.getAttribute("sessionID")!=null && (String)request.getAttribute("sessionID")==request.getSession().getId()) {
 			doPost(request, response);
 		} else {
@@ -36,6 +48,14 @@ public class ManageMenu extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
 			break;
 		case "users":
+			LogicUser logic = new LogicUser();
+			try {
+				userList = logic.getAll();
+				request.setAttribute("userList", userList);
+			} catch (SQLException e) {
+				request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+				request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
+			}
 			request.getRequestDispatcher("WEB-INF/usersPanel.jsp").forward(request, response);
 			break;
 		case "stats":

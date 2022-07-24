@@ -165,7 +165,7 @@ public class DataUser {
 	return deleteConfirmation;
 	}
 	
-	public ArrayList<User> getAll() throws Exception{
+	public ArrayList<User> getAll() throws SQLException{
 		User user;
 		ArrayList<User> list = new ArrayList<>();
 		String query = "select * from user";
@@ -181,7 +181,7 @@ public class DataUser {
 				}
 				list.add(user);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw e;
 		} finally {
 			try {
@@ -192,7 +192,7 @@ public class DataUser {
 					getAllStmt.close();
 				}
 				DbConnector.getInstance().releaseConn();
-			} catch (Exception e2) {
+			} catch (SQLException e2) {
 				throw e2;
 			}
 		}

@@ -1,3 +1,6 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="entities.User"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +12,9 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <% 	ArrayList<User> userList = new ArrayList<User>();
+    	userList = (ArrayList<User>)request.getAttribute("userList");
+    	String warning = (String)request.getAttribute("warning");	%>
 </head>
 <body style="background: #000000">
     <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
@@ -33,15 +39,23 @@
                     <table class="table">
                         <thead style="color: rgb(215,215,215);">
                             <tr>
+                            <% if(warning==null){ %>
                                 <th>ID</th>
                                 <th>voted</th>
+                            <% } else {  %>
+                            <th> <% out.print(warning); %> </th>
+                            <% } %>
                             </tr>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
-                            <tr>
-                                <td>Cell 1</td>
-                                <td>Cell 2</td>
+                         <% if(warning==null){ %>                         
+                            <% for(User user : userList){ %> 
+                            <tr>  
+                                <td><% out.print(user.getId()); %></td>
+                                <td><% if(user.hasVoted()){ out.print("✓"); } else { out.print("✗"); } %></td>
                             </tr>
+                            <% } %>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
