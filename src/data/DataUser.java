@@ -3,6 +3,9 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.cj.xdevapi.Result;
 
 import entities.Candidate;
 import entities.User;
@@ -160,6 +163,40 @@ public class DataUser {
 			}
 		}
 	return deleteConfirmation;
+	}
+	
+	public ArrayList<User> getAll() throws Exception{
+		User user;
+		ArrayList<User> list = new ArrayList<>();
+		String query = "select * from user";
+		PreparedStatement getAllStmt = null;
+		ResultSet rs = null;
+		try {
+			getAllStmt = DbConnector.getInstance().getConn().prepareStatement(query);
+			rs = getAllStmt.executeQuery();
+			while (rs!=null && rs.next()) {
+				user = new User(rs.getInt("id"), "");
+				if (rs.getBoolean("voted")) {
+					user.setVoted(true);
+				}
+				list.add(user);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs!=null) {
+					rs.close();
+				}
+				if (getAllStmt!=null) {
+					getAllStmt.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (Exception e2) {
+				throw e2;
+			}
+		}
+		return list;
 	}
 
 	
