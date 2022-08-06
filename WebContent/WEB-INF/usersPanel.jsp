@@ -1,4 +1,3 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="entities.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,7 +13,13 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <% 	ArrayList<User> userList = new ArrayList<User>();
     	userList = (ArrayList<User>)request.getAttribute("userList");
-    	String warning = (String)request.getAttribute("warning");	%>
+    	String warning = (String)request.getAttribute("warning");	
+    	String trigger = (String)request.getAttribute("trigger");	
+    	boolean deleteMode = false;
+    	if(trigger!=null){
+    		if(trigger.equals("delete")) deleteMode = true;
+    	}
+    	%>
 </head>
 <body style="background: #000000">
     <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
@@ -25,8 +30,18 @@
         </form>
             <div class="collapse navbar-collapse d-xl-flex justify-content-xl-center" id="navcol-1">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(184,184,184);">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(184,184,184);">Delete</a></li>
+                    <li class="nav-item">
+                    <form action="manageuser" method="post">
+                    	<input type="hidden" name="userOption" value="add">
+                    	<button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Add</button>
+                    </form>
+                    </li>
+                    <li class="nav-item">
+                    <form action="" method="">
+                    <input type="hidden" name="userOption" value="delete">
+                    <button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Delete</button>
+                    </form>
+                    </li>
                 </ul>
             </div><a class="nav-link" href="#" style="color: rgb(184,184,184);filter: blur(0px);">&nbsp; &nbsp;&nbsp;</a>
         </div>
@@ -39,24 +54,79 @@
                     <table class="table">
                         <thead style="color: rgb(215,215,215);">
                             <tr>
-                            <% if(warning==null){ %>
+                             <% if(warning==null){ %>
                                 <th>ID</th>
-                                <th>voted</th>
-                            <% } else {  %>
+                            	<th>
+                            	<%if(trigger!=null){
+                            		if(trigger.equals("add")){ 
+                                		out.print("Password/Nro. Trámite");
+                            		} else if(trigger.equals("delete")) {
+                                		out.print("Delete");
+                            			}
+                            	  } else { 
+                                		out.print("voted"); //TODO: check on correctness of this, maybe it gotta be outside the if(trigger!=null)
+                            		 } %>
+                            	</th>
+                            <%	  
+                            	} else {  %>
                             <th> <% out.print(warning); %> </th>
-                            <% } %>
-                            </tr>
+                            	<% } %>
+                             </tr>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
-                         <% if(warning==null){ %>                         
-                            <% for(User user : userList){ %> 
-                            <tr>  
-                                <td><% out.print(user.getId()); %></td>
-                                <td><% if(user.hasVoted()){ out.print("✓"); } else { out.print("✗"); } %></td>
-                            </tr>
-                            <% } %>
-                        <% } %>
-                        </tbody>
+                        <!-- //TODO: check everything inside this if(), specially line 108  -->       
+                         <% if(warning==null){ 	
+                         	 if(trigger!= null){
+                               	if(trigger.equals("add")){ %> <!-- 	//would've used switch but i was getting JasperExceptions for no apparent reason  -->
+                            <form action="manageuser" method="post">
+                            	<tr>
+                            		<td> <input type="number" name="id" maxlength="" placeholder="ID"> </td>
+                            		<td> <input name="password"placeholder="password"> </td>
+                            	</tr>
+                            	<tr>
+                            		<td> 
+                            			<input type="hidden" name="useCase" value="add">
+                            			<input type="hidden" name="userOption" value="action">
+                            		</td>
+                            		<td> <button type="submit" class="btn-menu">Add</button> </td>
+                            	</tr>
+                            </form>
+                            <% } else /* if (trigger.equals("delete") || true)*/{ 
+                           		  for(User user : userList){ %> 
+                            		<tr>  
+                               		 <td><% out.print(user.getId()); %></td>
+                               		
+                               			<td> 
+                               			 <form action="manageuser" method="post">
+                               			 	<input type="hidden" name="userOption" value="action">
+                               			 	<input type="hidden" name="useCase" value="delete">
+                               			 	<input type="hidden" name="id" value="<%= user.getId() %>">
+                               			 	<button type="submit" class="btn-menu">Delete</button>
+                               			 </form>
+                               			</td>
+                               		 
+                            		</tr>
+                            	<% } 
+                            	} 
+                            	%>
+                           <% } else{
+                            	 for(User user : userList){ %> 
+                        		 <tr>  
+                           		  <td><% out.print(user.getId()); %></td>
+                           		  <% if(user.hasVoted()){%>
+                           		  	<td>
+                           		  	<% out.print("✓"); %>
+                           		 	</td> 
+                           		  <% } else { %>
+                           		 	<td> 
+                           		 	<%out.print("✗"); %> 
+                           		 	</td>
+                           		   <% }  %>
+                           		</tr>
+                          <%  	 }
+                       	 		} 
+                       	 }%>
+                  </tbody>
                     </table>
                 </div>
             </div>
