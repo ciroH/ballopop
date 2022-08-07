@@ -27,8 +27,8 @@
         </div>
     </nav>
     <div class="container-fluid" style="background: #000000;">
-        <div class="row">
-            <div class="col-md-4"><img class="float-end" src="assets/img/vase-art-gray.jpg"></div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4" style="width: 214px;"><img class="float-end" src="assets/img/vase-art-gray-cut.jpg"></div>
             <div class="col-md-4 d-xxl-flex my-auto justify-content-xxl-center align-items-xxl-start" style="width: 800px;">
                 <div class="table-responsive d-xxl-flex justify-content-xxl-center align-items-xxl-center">
                     <table class="table">
@@ -53,7 +53,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-4"><img src="assets/img/vase-art-gray-inverted.jpg"></div>
+            <div class="col-md-4" style="width: 214px;"><img src="assets/img/vase-art-gray-cut-inverted.jpg"></div>
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
