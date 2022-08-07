@@ -1,19 +1,27 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet({ "/ManageUser", "/manageuser" })
-public class ManageUser extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import data.DataUser;
+import entities.User;
+import logic.LogicUser;
 
-    public ManageUser() {
+@WebServlet({ "/ManageUser", "/manageuser" })
+public class ManageUser extends ManageMenu {
+	private static final long serialVersionUID = 1L;
+	LogicUser logic;
+	DataUser data;
+   
+	public ManageUser() {
         super();
+        logic = new LogicUser();
+        data = new DataUser();
     }
 
 	
@@ -26,7 +34,7 @@ public class ManageUser extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userOption = (String)request.getAttribute("userOption");
+		String userOption = (String)request.getParameter("userOption");
 		switch (userOption) {
 		case "add":
 			request.setAttribute("trigger", "add");
@@ -41,7 +49,19 @@ public class ManageUser extends HttpServlet {
 			if(useCase != null){
 				switch (useCase) {
 				case "add":
-					
+					try {
+						int id = Integer.parseInt(request.getParameter("id"));
+						String pasword = request.getParameter("password"); 
+						User newUser = new User(id, pasword);
+						if (!data.add(newUser)) {
+							request.setAttribute("warning", "User already exists");
+						}
+					} catch (SQLException e) {
+						request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+					} catch (Exception e2) {
+						request.setAttribute("warning", e2.getMessage());
+					}
+					generateUserList(request, response);
 					break;
 				case "delete":
 					
