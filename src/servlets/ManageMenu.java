@@ -48,14 +48,7 @@ public class ManageMenu extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
 			break;
 		case "users":
-			LogicUser logic = new LogicUser();
-			try {
-				userList = logic.getAll();
-				request.setAttribute("userList", userList);
-			} catch (SQLException e) {
-				request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
-				request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
-			}
+			generateUserList(request, response);
 			request.getRequestDispatcher("WEB-INF/usersPanel.jsp").forward(request, response);
 			break;
 		case "stats":
@@ -67,9 +60,22 @@ public class ManageMenu extends HttpServlet {
 			break;
 		}
 	}
+	
 	private void forwardToIndex(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
+	protected void generateUserList(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+		LogicUser logic = new LogicUser();
+		try {
+			userList = logic.getAll();
+			request.setAttribute("userList", userList);
+		} catch (SQLException e) {
+			request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
+		}
 	}
 
 }
