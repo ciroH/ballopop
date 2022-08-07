@@ -75,7 +75,7 @@ public class DataUser {
 		return voteConfirmation;
 	}
 	
-	public boolean add(User newUser) {
+	public boolean add(User newUser) throws SQLException {
 		PreparedStatement addStmt = null;
 		boolean addConfirmation = false;
 	try {
@@ -90,7 +90,7 @@ public class DataUser {
 			addConfirmation = true;
 		 }		
 	} catch (SQLException e) {
-		e.printStackTrace();
+		throw e;
 	} finally {
 		try {
 			if (addStmt!=null) {
@@ -98,7 +98,7 @@ public class DataUser {
 			}
 			DbConnector.getInstance().releaseConn();
 		} catch (SQLException e2) {
-			e2.printStackTrace();
+			throw e2;
 		}
 	}
 		
