@@ -139,19 +139,19 @@ public class DataUser {
 	return response;
 	}
 
-	public boolean delete(User user) {
+	public boolean delete(int userId) throws SQLException {
 		PreparedStatement deleteStmt = null;
 		boolean deleteConfirmation = false;
 		try {
 			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE user WHERE id=?");
 			
-			deleteStmt.setInt(1, user.getId());
+			deleteStmt.setInt(1, userId);
 			
 			deleteStmt.executeQuery();
 			deleteConfirmation = true;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (deleteStmt!=null) {
@@ -159,7 +159,7 @@ public class DataUser {
 				}
 				DbConnector.getInstance().releaseConn();
 			} catch (SQLException e2) {
-				e2.printStackTrace();
+				throw e2;
 			}
 		}
 	return deleteConfirmation;
