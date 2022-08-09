@@ -30,7 +30,7 @@ public class ManageMenu extends HttpServlet {
 		System.out.println((String)request.getAttribute("sessionID"));
 		System.out.println(request.getSession().getId());
 		
-		if (request.getAttribute("sessionID")!=null && (String)request.getAttribute("sessionID")==request.getSession().getId()) {
+		if (request.getAttribute("sessionID")!=null && (String)request.getAttribute("sessionID")==request.getSession().getId()) { //can implicitly do a null check by inverting the == and replacing it with an .equals(); that way, it won't return NullPointerException.
 			doPost(request, response);
 		} else {
 			request.getSession().invalidate();

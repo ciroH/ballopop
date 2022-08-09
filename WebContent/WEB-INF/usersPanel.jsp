@@ -37,7 +37,7 @@
                     </form>
                     </li>
                     <li class="nav-item">
-                    <form action="" method="">
+                    <form action="manageuser" method="post">
                     <input type="hidden" name="userOption" value="delete">
                     <button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Delete</button>
                     </form>
@@ -61,10 +61,10 @@
                             		if(trigger.equals("add")){ 
                                 		out.print("Password/Nro. Trámite");
                             		} else if(trigger.equals("delete")) {
-                                		out.print("Delete");
+                                		out.print("Delete?");
                             			}
                             	  } else { 
-                                		out.print("voted"); //TODO: check on correctness of this, maybe it gotta be outside the if(trigger!=null)
+                                		out.print("voted"); 
                             		 } %>
                             	</th>
                             <%	  
@@ -74,7 +74,6 @@
                              </tr>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
-                        <!-- //TODO: check everything inside this if(), specially line 108  -->       
                          <% if(warning==null){ 	
                          	 if(trigger!= null){
                                	if(trigger.equals("add")){ %> <!-- 	//would've used switch but i was getting JasperExceptions for no apparent reason  -->

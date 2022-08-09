@@ -42,6 +42,7 @@ public class ManageUser extends ManageMenu {
 			break;
 		case "delete":
 			request.setAttribute("trigger", "delete");
+			generateUserList(request, response);
 			request.getRequestDispatcher("WEB-INF/usersPanel.jsp").forward(request, response);
 			break;
 		case "action":
@@ -56,15 +57,24 @@ public class ManageUser extends ManageMenu {
 						if (!data.add(newUser)) {
 							request.setAttribute("warning", "User already exists");
 						}
+					
+						generateUserList(request, response);
 					} catch (SQLException e) {
 						request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
 					} catch (Exception e2) {
 						request.setAttribute("warning", e2.getMessage());
 					}
-					generateUserList(request, response);
 					break;
 				case "delete":
-					
+					int id = Integer.parseInt(request.getParameter("id"));
+					try {
+					data.delete(id);
+					generateUserList(request, response);
+					} catch (SQLException e) {
+						request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+					} catch (Exception e2) {
+						request.setAttribute("warning", e2.getMessage());
+					}
 					break;
 				}
 			}

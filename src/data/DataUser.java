@@ -143,11 +143,11 @@ public class DataUser {
 		PreparedStatement deleteStmt = null;
 		boolean deleteConfirmation = false;
 		try {
-			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE user WHERE id=?");
+			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE FROM user WHERE id=?");
 			
 			deleteStmt.setInt(1, userId);
 			
-			deleteStmt.executeQuery();
+			deleteStmt.executeUpdate();
 			deleteConfirmation = true;
 			
 		} catch (SQLException e) {
