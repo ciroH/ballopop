@@ -48,7 +48,7 @@ public class DataCandidate {
 	return list;
 	}
 	
-	public boolean add(Candidate newCandidate) {
+	public boolean add(Candidate newCandidate) throws SQLException {
 		PreparedStatement addStmt = null;
 		boolean addConfirmation = false;
 	try {
@@ -85,7 +85,7 @@ public class DataCandidate {
 			addConfirmation = true;
 		 }		
 	} catch (SQLException e) {
-		e.printStackTrace();
+		throw e;
 	} finally {
 		try {
 			if (addStmt!=null) {
@@ -93,7 +93,7 @@ public class DataCandidate {
 			}
 			DbConnector.getInstance().releaseConn();
 		} catch (SQLException e2) {
-			e2.printStackTrace();
+			throw e2;
 		}
 	}
 		
@@ -133,7 +133,7 @@ public class DataCandidate {
 	return response;
 	}
 	
-	public boolean modify(Candidate candidate) { 
+	public boolean modify(Candidate candidate) throws SQLException { 
 	
 /* 
  * no need to verify the existence of a candidate, since the admin will be sending a valid and existing candidate to this method;
@@ -152,11 +152,11 @@ public class DataCandidate {
 			
 			modifyStmt.setInt(5, candidate.getId());
 			
-			modifyStmt.executeQuery();
+			modifyStmt.executeUpdate();
 			modifyConfirmation = true;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (modifyStmt!=null) {
@@ -164,13 +164,13 @@ public class DataCandidate {
 				}
 				DbConnector.getInstance().releaseConn();
 			} catch (SQLException e2) {
-				e2.printStackTrace();
+				throw e2;
 			}
 		}
 	return modifyConfirmation;
 	}
 	
-	public boolean delete(Candidate candidate) {
+	public boolean delete(Candidate candidate) throws SQLException {
 		PreparedStatement deleteStmt = null;
 		boolean deleteConfirmation = false;
 		try {
@@ -178,11 +178,11 @@ public class DataCandidate {
 			
 			deleteStmt.setInt(1, candidate.getId());
 			
-			deleteStmt.executeQuery();
+			deleteStmt.executeUpdate();
 			deleteConfirmation = true;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (deleteStmt!=null) {
@@ -190,7 +190,7 @@ public class DataCandidate {
 				}
 				DbConnector.getInstance().releaseConn();
 			} catch (SQLException e2) {
-				e2.printStackTrace();
+				throw e2;
 			}
 		}
 	return deleteConfirmation;
