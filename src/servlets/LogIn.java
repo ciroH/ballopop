@@ -83,7 +83,12 @@ public class LogIn extends HttpServlet {
 			User user = logicUser.validateLogIn(key, password);
 			if(user != null && !user.hasVoted()) {
 				LinkedList<Candidate> candidateList = new LinkedList<>();	
-				candidateList = logicCandidate.getCandidates();
+				try {
+					candidateList = logicCandidate.getCandidates();
+				} catch (SQLException e) {
+					request.setAttribute("warning",e.getSQLState() + " : " + e.getMessage());
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
 				request.setAttribute("candidates", candidateList);
 				request.setAttribute("credentials", user);
 				request.getRequestDispatcher("WEB-INF/voting.jsp").forward(request, response);
