@@ -25,16 +25,10 @@ public class LogicUser {
 		
 	}	
 	
-	public ArrayList<User> getAll() throws SQLException {
+	public ArrayList<User> getAllUsers() throws SQLException {
 		DataUser data = new DataUser();
 		ArrayList<User> list;
-		try {
-			
-			list = data.getAll();
-	
-		} catch (SQLException e) {
-			throw e;
-		}
+		list = data.getAll();
 		return list;
 	}
 	
