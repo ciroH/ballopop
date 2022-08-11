@@ -9,7 +9,7 @@ import entities.Candidate;
 
 public class DataCandidate {
 
-	public LinkedList<Candidate> getAll(){
+	public LinkedList<Candidate> getAll() throws SQLException{
 		Candidate candidate;
 		LinkedList<Candidate> list = new LinkedList<>();
 		String query = "select * from candidate";
@@ -30,7 +30,7 @@ public class DataCandidate {
 			}			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (rs!=null) {
@@ -41,7 +41,7 @@ public class DataCandidate {
 				}
 				DbConnector.getInstance().releaseConn();
 			} catch (SQLException e2) {
-				e2.printStackTrace();
+				throw e2;
 			}
 		}
 		

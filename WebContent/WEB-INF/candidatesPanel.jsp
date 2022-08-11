@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="entities.Candidate"%>
+<%@page import="java.util.LinkedList"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <% LinkedList<Candidate> candidateList = (LinkedList<Candidate>)request.getAttribute("candidateList");%>
 </head>
 <body style="background: #000000">
  <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
@@ -33,6 +36,7 @@
                 <div class="table-responsive d-xxl-flex justify-content-xxl-center align-items-xxl-center">
                     <table class="table">
                         <thead style="color: rgb(215,215,215);">
+                            <% for(Candidate candidate : candidateList){ %>
                             <tr>
                                 <th>Name</th>
                                 <th>Photo</th>
@@ -40,15 +44,18 @@
                                 <th>Party</th>
                                 <th>Votes</th>
                             </tr>
+                            <% } %>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
+                            <% for(Candidate candidate : candidateList){ %>
                             <tr>
-                                <td>Marcus Aurelius</td>
-                                <td>https://i.imgur.com/vz7vR8h.jpg</td>
-                                <td>Last emperor of the Pax Romana. Served as Roman consul in 140, 145, and 161. Holded the Empire together through Roman Empire´s first true pandemic, the Parthian War, and the Germanic Wars.</td>
-                                <td>Cell 4</td>
-                                <td>Cell 5</td>
+                                <th><% out.print(candidate.getName()); %></th>
+                                <th><% out.print(candidate.getPhoto()); %></th>
+                                <th><% out.print(candidate.getDescription()); %></th>
+                                <th><% out.print(candidate.getParty()); %></th>
+                                <th><% out.print(candidate.getVotes()); %></th>
                             </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>

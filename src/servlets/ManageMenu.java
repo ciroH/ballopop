@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Candidate;
 import entities.User;
+import logic.LogicCandidate;
 import logic.LogicUser;
 
 @WebServlet({ "/ManageMenu", "/managemenu" })
@@ -45,6 +46,7 @@ public class ManageMenu extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
 			break;
 		case "candidates":
+			generateCandidateList(request, response);
 			request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
 			break;
 		case "users":
@@ -70,12 +72,26 @@ public class ManageMenu extends HttpServlet {
 		throws ServletException, IOException {
 		LogicUser logic = new LogicUser();
 		try {
-			userList = logic.getAll();
+			userList = logic.getAllUsers();
 			request.setAttribute("userList", userList);
 		} catch (SQLException e) {
 			request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
 			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
 		}
+	}
+	
+	protected void generateCandidateList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		LogicCandidate logic = new LogicCandidate();
+		try {
+			candidateList = logic.getCandidates();
+			request.setAttribute("candidateList", candidateList);
+		} catch (SQLException e) {
+			request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 }
