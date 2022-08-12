@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <% LinkedList<Candidate> candidateList = (LinkedList<Candidate>)request.getAttribute("candidateList");%>
+    <% LinkedList<Candidate> candidateList = (LinkedList<Candidate>)request.getAttribute("candidateList");
+       String trigger = (String)request.getAttribute("trigger");
+    %>
 </head>
 <body style="background: #000000">
  <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
@@ -42,20 +44,67 @@
                                 <th>Photo</th>
                                 <th>Description</th>
                                 <th>Party</th>
-                                <th>Votes</th>
+                                <th>
+                                <% 
+									if(trigger == null) out.print("Votes");
+									else out.print("   ");
+                                %>
+                                </th>
                             </tr>
                             <% } %>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
-                            <% for(Candidate candidate : candidateList){ %>
+                           <% if(trigger == null || trigger.equals("delete") || trigger.equals("modify")){ %>
+                            <%	for(Candidate candidate : candidateList){  %> 
                             <tr>
                                 <th><% out.print(candidate.getName()); %></th>
                                 <th><% out.print(candidate.getPhoto()); %></th>
                                 <th><% out.print(candidate.getDescription()); %></th>
                                 <th><% out.print(candidate.getParty()); %></th>
-                                <th><% out.print(candidate.getVotes()); %></th>
+                                <th>
+                                	<% if(trigger == null){ %>
+                                	<% out.print(candidate.getVotes()); %>
+                                 	<% } else if(trigger.equals("delete")){ %>
+                                 		<form action="managecandidate" method="post">
+                                 			<input type="hidden" name="adminOption" value="delete">
+                                 			<input type="hidden" name="id" value="<%= candidate.getId() %>">
+                                 			<button class="btn-main" type="submit">Delete</button>
+                                 		</form>
+                                 	<% } else /* trigger.equals("modify")*/{ %>	
+                               			 <form action="managecandidate" method="post">
+                                 			<input type="hidden" name="adminOption" value="modify">
+                                 			<input type="hidden" name="id" value="<%= candidate.getId() %>">
+                                 			<button class="btn-main" type="submit">Modify</button>
+                                 		</form>
+                                	<% } %>
+                                </th>
                             </tr>
                             <% } %>
+                           <% } else  %>
+                           		<%	if(trigger!=null && trigger.equals("add")){ %>
+                           		<form action="managecandidate" method="post">
+                           			<th><input name="name" type="text"></th>
+                           			<th><input name="description" type="text"></th>
+                           			<th><input name="party" type="text"></th>
+                           			<th><input name="photo" type="text"></th>
+                           			<th>
+                           				<input type="hidden" name="adminOption" value="add">
+                           				<button type="submit" class="btn-main">Add</button>
+                           			</th>
+								</form>
+                           	<%	} else if(trigger!=null && trigger.equals("confirmmodify"))/* trigger.equals(confirmmodify) */{ %>
+                           	<form action="managecandidate" method="post">
+                           			<th><input name="name" type="text"></th>
+                           			<th><input name="description" type="text"></th>
+                           			<th><input name="party" type="text"></th>
+                           			<th><input name="photo" type="text"></th>
+                           			<th>
+                           				<input type="hidden" name="id" value="<%= (String)request.getAttribute("candidateIdToModify") %>">
+                           				<input type="hidden" name="adminOption" value="confirmmodify">
+                           				<button type="submit" class="btn-main">Confirm</button>
+                           			</th>
+								</form>
+                           	<% } %>
                         </tbody>
                     </table>
                 </div>
