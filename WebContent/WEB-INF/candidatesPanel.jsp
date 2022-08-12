@@ -24,9 +24,22 @@
         </form>
             <div class="collapse navbar-collapse d-xl-flex justify-content-xl-center" id="navcol-1">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(184,184,184);">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(184,184,184);">modify</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(184,184,184);">Delete</a></li>
+                     <li class="nav-item">
+                    <form action="managecandidate" method="post">
+                    	<input type="hidden" name="candidateOption" value="add">
+                    	<button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Add</button>
+                    </form>
+                    </li> <li class="nav-item">
+                    <form action="managecandidate" method="post">
+                    	<input type="hidden" name="candidateOption" value="modify">
+                    	<button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Modify</button>
+                    </form>
+                    </li> <li class="nav-item">
+                    <form action="managecandidate" method="post">
+                    	<input type="hidden" name="candidateOption" value="delete">
+                    	<button class="btn-menu" type="submit" style="color: rgb(184,184,184);">Delete</button>
+                    </form>
+                    </li>
                 </ul>
             </div><a class="nav-link" href="#" style="color: rgb(184,184,184);filter: blur(0px);">&nbsp; &nbsp;&nbsp;</a>
         </div>
@@ -66,13 +79,13 @@
                                 	<% out.print(candidate.getVotes()); %>
                                  	<% } else if(trigger.equals("delete")){ %>
                                  		<form action="managecandidate" method="post">
-                                 			<input type="hidden" name="adminOption" value="delete">
+                                 			<input type="hidden" name="useCase" value="delete">
                                  			<input type="hidden" name="id" value="<%= candidate.getId() %>">
                                  			<button class="btn-main" type="submit">Delete</button>
                                  		</form>
                                  	<% } else /* trigger.equals("modify")*/{ %>	
                                			 <form action="managecandidate" method="post">
-                                 			<input type="hidden" name="adminOption" value="modify">
+                                 			<input type="hidden" name="useCase" value="modify">
                                  			<input type="hidden" name="id" value="<%= candidate.getId() %>">
                                  			<button class="btn-main" type="submit">Modify</button>
                                  		</form>
@@ -88,7 +101,7 @@
                            			<th><input name="party" type="text"></th>
                            			<th><input name="photo" type="text"></th>
                            			<th>
-                           				<input type="hidden" name="adminOption" value="add">
+                           				<input type="hidden" name="useCase" value="add">
                            				<button type="submit" class="btn-main">Add</button>
                            			</th>
 								</form>
@@ -100,7 +113,7 @@
                            			<th><input name="photo" type="text"></th>
                            			<th>
                            				<input type="hidden" name="id" value="<%= (String)request.getAttribute("candidateIdToModify") %>">
-                           				<input type="hidden" name="adminOption" value="confirmmodify">
+                           				<input type="hidden" name="useCase" value="confirmmodify">
                            				<button type="submit" class="btn-main">Confirm</button>
                            			</th>
 								</form>
