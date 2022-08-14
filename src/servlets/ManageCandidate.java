@@ -89,6 +89,7 @@ public class ManageCandidate extends ManageMenu {
 				generateCandidateList(request, response);
 				break;
 			}
+	    	generateCandidateList(request, response);
 	    	request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
     	} catch (/*SQL*/Exception e) {
 			request.setAttribute("warning", "e");
