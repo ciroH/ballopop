@@ -48,6 +48,40 @@ public class DataCandidate {
 	return list;
 	}
 	
+	public Candidate get(int id) throws SQLException{
+		Candidate candidate = null;
+		String query = "SELECT * FROM candidate where id=?";
+		PreparedStatement getStatement = DbConnector.getInstance().getConn().prepareStatement(query);
+		ResultSet rs = null;
+		try {
+			getStatement.setInt(1, id);
+			rs = getStatement.executeQuery();
+			if (rs!=null && rs.next()) {
+				candidate = new Candidate(rs.getString("name"));
+				candidate.setId(rs.getInt("id"));
+				candidate.setParty(rs.getString("party"));
+				candidate.setPhoto(rs.getString("photo"));
+				candidate.setVotes(rs.getInt("votes"));
+				candidate.setDescription(rs.getString("description"));
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (rs!=null) {
+					rs.close();
+				}
+				if (getStatement!=null) {
+					getStatement.close();
+				}
+				DbConnector.getInstance().releaseConn();
+			} catch (Exception e2) {
+				throw e2;
+			}
+		}
+		return candidate;
+	}
+	
 	public boolean add(Candidate newCandidate) throws SQLException {
 		PreparedStatement addStmt = null;
 		boolean addConfirmation = false;
