@@ -1,18 +1,30 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logic.LogicCandidate;
+import data.DataCandidate;
+import entities.Candidate;
+
 @WebServlet({ "/ManageCandidate", "/managecandidate" })
 public class ManageCandidate extends ManageMenu {
 	private static final long serialVersionUID = 1L;
+	private Exception IllegalArgumentException;
+			LogicCandidate logic;
+			DataCandidate data;
+			Candidate candidate;
+	
        
     public ManageCandidate() {
         super();
-
+        logic = new LogicCandidate();
+        data = new DataCandidate();
     }
 
     @Override
