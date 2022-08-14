@@ -91,11 +91,14 @@ public class ManageCandidate extends ManageMenu {
 			}
 	    	generateCandidateList(request, response);
 	    	request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
-    	} catch (/*SQL*/Exception e) {
-			request.setAttribute("warning", "e");
-	/*	} catch (IOException | ServletException e) {
+    	} catch (SQLException e) {
+			request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+		} catch (IOException | ServletException | IllegalArgumentException  e) {
 			request.setAttribute("warning", e.getMessage());
-	*/	} finally {
+		} catch (Exception e) {
+			request.setAttribute("warning", e.getMessage());
+		} finally {
+			generateCandidateList(request, response);
 			request.getRequestDispatcher("WEB-INF/candidatesPanel.jsp").forward(request, response);
 		}
 	}
