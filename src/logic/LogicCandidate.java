@@ -20,4 +20,14 @@ public class LogicCandidate {
 		return candidateList;
 	}
 	
+	public Candidate get(int id) throws SQLException{
+		Candidate candidate = null;
+		DataCandidate data = new DataCandidate();
+		if (candidate.getDescription() == null) candidate.setDescription("");
+		if (candidate.getParty() == null) candidate.setParty("");
+		if (candidate.getPhoto() == null) candidate.setPhoto("");
+		candidate = data.get(id);
+		return candidate;
+	}
+	
 }
