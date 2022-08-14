@@ -174,7 +174,7 @@ public class DataCandidate {
 		PreparedStatement deleteStmt = null;
 		boolean deleteConfirmation = false;
 		try {
-			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE candidate WHERE id=?");
+			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE FROM candidate WHERE id=?");
 			
 			deleteStmt.setInt(1, candidateId);
 			
