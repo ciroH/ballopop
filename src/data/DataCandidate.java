@@ -170,13 +170,13 @@ public class DataCandidate {
 	return modifyConfirmation;
 	}
 	
-	public boolean delete(Candidate candidate) throws SQLException {
+	public boolean delete(int candidateId) throws SQLException {
 		PreparedStatement deleteStmt = null;
 		boolean deleteConfirmation = false;
 		try {
 			deleteStmt = DbConnector.getInstance().getConn().prepareStatement("DELETE candidate WHERE id=?");
 			
-			deleteStmt.setInt(1, candidate.getId());
+			deleteStmt.setInt(1, candidateId);
 			
 			deleteStmt.executeUpdate();
 			deleteConfirmation = true;
