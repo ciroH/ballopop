@@ -54,7 +54,14 @@ public class ManageCandidate extends ManageMenu {
 						data.add(candidate);
 					break;
 				case "modify":
-					
+					int idToModify = Integer.parseInt(request.getParameter("id"));
+					candidate = logic.get(idToModify);
+					if (candidate!=null) {
+						request.setAttribute("candidateToModify", candidate);
+						request.setAttribute("trigger", "confirmmodify");
+					} else {
+						request.setAttribute("warning", "Unexpected error when getting candidate info from data layer");
+					}
 					break;
 				case "confirmmodify":
 					
