@@ -47,7 +47,11 @@ public class ManageCandidate extends ManageMenu {
 				String useCase = request.getParameter("useCase");
 				switch (useCase) {
 				case "add":
-					
+					candidate = new Candidate(request.getParameter("name"));
+					candidate.setDescription(request.getParameter("description"));
+					candidate.setParty(request.getParameter("party"));
+					candidate.setPhoto(request.getParameter("photo"));
+						data.add(candidate);
 					break;
 				case "modify":
 					
