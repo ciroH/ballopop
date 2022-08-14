@@ -75,7 +75,7 @@ public class ManageCandidate extends ManageMenu {
 						data.modify(candidate);
 					break;
 				case "delete":
-		
+					data.delete(Integer.parseInt(request.getParameter("id")));
 					break;
 	
 				default:
