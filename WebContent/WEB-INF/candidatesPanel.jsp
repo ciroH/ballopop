@@ -51,7 +51,6 @@
                 <div class="table-responsive d-xxl-flex justify-content-xxl-center align-items-xxl-center">
                     <table class="table">
                         <thead style="color: rgb(215,215,215);">
-                            <% for(Candidate candidate : candidateList){ %>
                             <tr>
                                 <th>Name</th>
                                 <th>Photo</th>
@@ -64,7 +63,6 @@
                                 %>
                                 </th>
                             </tr>
-                            <% } %>
                         </thead>
                         <tbody style="color: rgb(83,83,83);">
                            <% if(trigger == null || trigger.equals("delete") || trigger.equals("modify")){ %>
@@ -79,15 +77,17 @@
                                 	<% out.print(candidate.getVotes()); %>
                                  	<% } else if(trigger.equals("delete")){ %>
                                  		<form action="managecandidate" method="post">
+                                 			<input type="hidden" name="candidateOption" value="action">
                                  			<input type="hidden" name="useCase" value="delete">
                                  			<input type="hidden" name="id" value="<%= candidate.getId() %>">
-                                 			<button class="btn-main" type="submit">Delete</button>
+                                 			<button class="btn-main" type="submit" style="color: rgb(184,184,184);">Delete</button>
                                  		</form>
                                  	<% } else /* trigger.equals("modify")*/{ %>	
                                			 <form action="managecandidate" method="post">
+                                 			<input type="hidden" name="candidateOption" value="action">
                                  			<input type="hidden" name="useCase" value="modify">
                                  			<input type="hidden" name="id" value="<%= candidate.getId() %>">
-                                 			<button class="btn-main" type="submit">Modify</button>
+                                 			<button class="btn-main" type="submit" style="color: rgb(184,184,184);">Modify</button>
                                  		</form>
                                 	<% } %>
                                 </th>
@@ -96,25 +96,29 @@
                            <% } else  %>
                            		<%	if(trigger!=null && trigger.equals("add")){ %>
                            		<form action="managecandidate" method="post">
-                           			<th><input name="name" type="text"></th>
+                           			<th><input name="name" type="text" required ></th>
                            			<th><input name="description" type="text"></th>
                            			<th><input name="party" type="text"></th>
                            			<th><input name="photo" type="text"></th>
                            			<th>
+                           				<input type="hidden" name="candidateOption" value="action">
                            				<input type="hidden" name="useCase" value="add">
-                           				<button type="submit" class="btn-main">Add</button>
+                           				<button type="submit" class="btn-main" style="color: rgb(184,184,184);">Add</button>
                            			</th>
 								</form>
                            	<%	} else if(trigger!=null && trigger.equals("confirmmodify"))/* trigger.equals(confirmmodify) */{ %>
-                           	<form action="managecandidate" method="post">
-                           			<th><input name="name" type="text"></th>
-                           			<th><input name="description" type="text"></th>
-                           			<th><input name="party" type="text"></th>
-                           			<th><input name="photo" type="text"></th>
+                           		<%	Candidate candidateToModify = (Candidate)request.getAttribute("candidate");
+	                           		%>	
+                           		<form action="managecandidate" method="post">
+                           			<th><input name="name" type="text" required value="<%= candidateToModify.getName() %>" ></th>
+                           			<th><input name="description" type="text" value="<%= candidateToModify.getDescription() %>"></th>
+                           			<th><input name="party" type="text" value="<%= candidateToModify.getParty() %>"></th>
+                           			<th><input name="photo" type="text" value="<%= candidateToModify.getPhoto() %>"></th>
                            			<th>
-                           				<input type="hidden" name="id" value="<%= (String)request.getAttribute("candidateIdToModify") %>">
+                           				<input type="hidden" name="candidateOption" value="action">
+                           				<input type="hidden" name="id" value="<%= candidateToModify.getId() %>">
                            				<input type="hidden" name="useCase" value="confirmmodify">
-                           				<button type="submit" class="btn-main">Confirm</button>
+                           				<button type="submit" class="btn-main" style="color: rgb(184,184,184);">Confirm</button>
                            			</th>
 								</form>
                            	<% } %>
