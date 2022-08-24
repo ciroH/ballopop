@@ -93,8 +93,7 @@
                                 </th>
                             </tr>
                             <% } %>
-                           <% } else  %>
-                           		<%	if(trigger!=null && trigger.equals("add")){ %>
+                           <% } else if(trigger!=null && trigger.equals("add")){ %>
                            		<form action="managecandidate" method="post">
                            			<th><input name="name" type="text" required ></th>
                            			<th><input name="description" type="text"></th>
@@ -107,7 +106,7 @@
                            			</th>
 								</form>
                            	<%	} else if(trigger!=null && trigger.equals("confirmmodify"))/* trigger.equals(confirmmodify) */{ %>
-                           		<%	Candidate candidateToModify = (Candidate)request.getAttribute("candidate");
+                           		<%	Candidate candidateToModify = (Candidate)request.getAttribute("candidateToModify");
 	                           		%>	
                            		<form action="managecandidate" method="post">
                            			<th><input name="name" type="text" required value="<%= candidateToModify.getName() %>" ></th>
