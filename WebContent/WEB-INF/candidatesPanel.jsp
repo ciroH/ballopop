@@ -96,9 +96,9 @@
                            <% } else if(trigger!=null && trigger.equals("add")){ %>
                            		<form action="managecandidate" method="post">
                            			<th><input name="name" type="text" required ></th>
+                           			<th><input name="photo" type="text"></th>
                            			<th><input name="description" type="text"></th>
                            			<th><input name="party" type="text"></th>
-                           			<th><input name="photo" type="text"></th>
                            			<th>
                            				<input type="hidden" name="candidateOption" value="action">
                            				<input type="hidden" name="useCase" value="add">
@@ -110,9 +110,9 @@
 	                           		%>	
                            		<form action="managecandidate" method="post">
                            			<th><input name="name" type="text" required value="<%= candidateToModify.getName() %>" ></th>
+                           			<th><input name="photo" type="text" value="<%= candidateToModify.getPhoto() %>"></th>
                            			<th><input name="description" type="text" value="<%= candidateToModify.getDescription() %>"></th>
                            			<th><input name="party" type="text" value="<%= candidateToModify.getParty() %>"></th>
-                           			<th><input name="photo" type="text" value="<%= candidateToModify.getPhoto() %>"></th>
                            			<th>
                            				<input type="hidden" name="candidateOption" value="action">
                            				<input type="hidden" name="id" value="<%= candidateToModify.getId() %>">
