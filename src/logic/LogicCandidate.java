@@ -2,7 +2,7 @@ package logic;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
-
+import com.mysql.cj.util.StringUtils;
 import data.DataCandidate;
 import entities.Candidate;
 
@@ -13,9 +13,9 @@ public class LogicCandidate {
 	LinkedList<Candidate> candidateList = new LinkedList<>();
 	candidateList = candidateDataAccessObject.getAll();
 	for (Candidate candidate : candidateList) {
-		if(candidate.getDescription() == null) candidate.setDescription("none");
-		if(candidate.getParty() == null) candidate.setParty("none");
-		if(candidate.getPhoto() == null) candidate.setPhoto("none");
+		if(StringUtils.isNullOrEmpty(candidate.getDescription())) candidate.setDescription("empty");
+		if(StringUtils.isNullOrEmpty(candidate.getParty())) candidate.setParty("none");
+		if(StringUtils.isNullOrEmpty(candidate.getPhoto())) candidate.setPhoto("none");
 	}
 		return candidateList;
 	}
