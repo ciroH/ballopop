@@ -20,6 +20,14 @@
   box-shadow: 3px 3px 4px rgba(0,0,0,0.2);
 }
 
+
+.no-wheel input[type=number]::-webkit-outer-spin-button{
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+  	margin: 0;
+}
+
 .illustration {
   max-width: 320px;
   text-align: center;
