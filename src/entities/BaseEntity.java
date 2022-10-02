@@ -1,6 +1,6 @@
 package entities;
 
-public class BaseEntity {
+public abstract class BaseEntity {
 	int id;
 	String password;
 	
