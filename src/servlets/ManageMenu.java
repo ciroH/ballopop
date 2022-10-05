@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import data.DataStats;
 import entities.Candidate;
 import entities.User;
 import logic.LogicCandidate;
@@ -54,7 +56,8 @@ public class ManageMenu extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/usersPanel.jsp").forward(request, response);
 			break;
 		case "stats":
-			
+			generateStats(request, response);
+			request.getRequestDispatcher("WEB-INF/statsPanel.jsp");
 			break;
 
 		default:
@@ -91,6 +94,19 @@ public class ManageMenu extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
 		}
 		
+	}
+	
+	public void generateStats(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException,IOException {
+		DataStats data = new DataStats();
+		HashMap<String, Integer> votesCount = new HashMap<>();
+		try {
+			votesCount = data.getVotes();
+			request.setAttribute("votes", votesCount);
+		} catch (SQLException e) {
+			request.setAttribute("warning", e.getSQLState() + " : " + e.getMessage());
+			request.getRequestDispatcher("WEB-INF/mainPanel.jsp").forward(request, response);
+		}
 		
 	}
 
