@@ -31,7 +31,7 @@
                 </div>
             </div>
         </nav>
-        <form action="login" method="post">
+        <form action="login" method="post" accept-charset="utf-8">
             <h2 class="visually-hidden">Login Form</h2>
 			<div class="illustration"><img class="logo" <% if(!adminPriv){ %> src="assets/img/ballopop-logo.svg" <% }else{ %> src="assets/img/ballopop-logo-admin.svg" <% } %>></div>
             <div class="mb-3"><input class="form-control no-wheel" type="number" name="id" <% if(adminPriv){ %>placeholder="ID"<% }else { %>placeholder="DNI" <% } %> min="0" max="99999999" maxlength="8" autofocus></div>
