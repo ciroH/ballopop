@@ -57,7 +57,7 @@ public class ManageMenu extends HttpServlet {
 			break;
 		case "stats":
 			generateStats(request, response);
-			request.getRequestDispatcher("WEB-INF/statsPanel.jsp");
+			request.getRequestDispatcher("WEB-INF/statsPanel.jsp").forward(request, response);
 			break;
 
 		default:
