@@ -99,7 +99,7 @@ public class ManageMenu extends HttpServlet {
 	public void generateStats(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException,IOException {
 		DataStats data = new DataStats();
-		HashMap<String, Integer> votesCount = new HashMap<>();
+		ArrayList<Candidate> votesCount = new ArrayList<>();
 		try {
 			votesCount = data.getVotes();
 			request.setAttribute("votes", votesCount);
