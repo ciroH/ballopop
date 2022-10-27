@@ -1,5 +1,5 @@
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entities.Candidate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Animated-List.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <% HashMap<String,Integer> votes = (HashMap<String,Integer>)request.getAttribute("votes");
-    	%>
+    <% ArrayList<Candidate> votes = (ArrayList<Candidate>)request.getAttribute("votes"); %>
 </head>
 <body style="background: #000000">
  <nav class="navbar navbar-light navbar-expand-md" style="color: rgb(184,184,184);background: rgba(255,0,0,0);">
@@ -29,22 +28,22 @@
     <div class="container-fluid" style="background: #000000;">
         <div class="row d-flex justify-content-center">
             <div class="col-md-4" style="width: 214px;"><img class="float-end" src="assets/img/vase-art-gray-cut.jpg"></div>
-            <div>
+            <div class="col-md-4 d-xxl-flex my-auto justify-content-xxl-center align-items-xxl-start">
 				<% if(votes.isEmpty()){ %>
 					<h4> No Results to show</h4>
 				<%} else {%>
-					<table>
-						<thead>
+					<table class="table">
+						<thead class="thead-dark">
 							<tr>
 								<th>Name</th>
 								<th>Votes</th>
 							</tr>
 						</thead>
-						<tbody>
-							<% for(Map.Entry<String,Integer> candidateEntry = votes){ %>
+						<tbody class="table-striped">
+							<% for(Candidate candidateEntry : votes){ %>
 								<tr>
-									<th><% out.print(candidateEntry.getKey()); %></th>
-									<th><% out.print(candidateEntry.getValue()); %></th>
+									<th><% out.print(candidateEntry.getName()); %></th>
+									<th><% out.print(candidateEntry.getVotes()); %></th>
 								</tr>
 							<% } %>
 						</tbody>
