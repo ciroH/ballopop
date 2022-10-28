@@ -5,9 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mysql.cj.xdevapi.Result;
-
-import entities.Candidate;
 import entities.User;
 
 public class DataUser {
