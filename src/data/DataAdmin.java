@@ -3,6 +3,7 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 import entities.Admin;
 
@@ -10,20 +11,21 @@ public class DataAdmin {
 
 	public boolean logIn(Admin credentials) throws SQLException {
 		boolean accessConfirmation = false;
-		String query = "select id from admin where id=? and password=?";
+		String query = "select password from admin where id=?";
 		PreparedStatement LogInStmt = null;
 		ResultSet rs = null;
+		BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
 		try {
 			LogInStmt = DbConnector.getInstance().getConn().prepareStatement(query);
 			LogInStmt.setInt(1, credentials.getId());
-			LogInStmt.setString(2, credentials.getPassword());
 			rs = LogInStmt.executeQuery();
-			
 
-			accessConfirmation = (rs!=null && rs.next());
-			// if resultset has a result it means the login
-			//credentials are valid, ergo accessConfirmation is true.
-
+			if (rs!=null && rs.next()) {
+				/*	
+				 * 
+				 */
+				accessConfirmation = bpe.checkPassword(credentials.getPassword(), rs.getString("password"));	
+			}
 		
 		} catch (SQLException e) {
 			throw e;
