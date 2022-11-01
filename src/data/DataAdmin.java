@@ -21,8 +21,10 @@ public class DataAdmin {
 			rs = LogInStmt.executeQuery();
 
 			if (rs!=null && rs.next()) {
-				/*	
-				 * 
+				/*	if the ResultSet is not null, and there's a next
+				 *  position for the rs cursor to point at, the cursor will move to that
+				 *  position (from -1 to 0 in this case), and the bpe will check that the credential's
+				 *  plain text password matches the DB password after digesting operations. 
 				 */
 				accessConfirmation = bpe.checkPassword(credentials.getPassword(), rs.getString("password"));	
 			}
