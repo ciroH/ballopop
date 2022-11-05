@@ -108,7 +108,7 @@ public class DataUser {
 	return addConfirmation;
 	}
 
-	public boolean userExists(User entry) throws SQLException { //returns true if candidate with the same name as entry.getName() exists in database
+	public boolean userExists(User entry) throws SQLException {
 		boolean response;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
