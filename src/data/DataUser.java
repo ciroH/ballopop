@@ -5,24 +5,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
+
 import entities.User;
 
 public class DataUser {
 
 	public User logIn(User credentials) {
 		User userObject = null;
-		String query = "select voted from user where id=? and password=?";
+		String query = "select voted,password from user where id=?";
 		PreparedStatement LogInStmt = null;
 		ResultSet rs = null;
+		BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
 		try {
 			LogInStmt = DbConnector.getInstance().getConn().prepareStatement(query);
 			LogInStmt.setInt(1, credentials.getId());
-			LogInStmt.setString(2, credentials.getPassword());
 			rs = LogInStmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
+				if(bpe.checkPassword(credentials.getPassword(), rs.getString("password"))) {
 				userObject = new User(credentials.getId(), credentials.getPassword());
 				userObject.setVoted(rs.getBoolean("voted"));
+				}
 			}
 			
 		} catch (SQLException e) {
