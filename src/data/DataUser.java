@@ -113,9 +113,8 @@ public class DataUser {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			statement = DbConnector.getInstance().getConn().prepareStatement("select id from user where id=? and password=?");
+			statement = DbConnector.getInstance().getConn().prepareStatement("select * from user where id=?");
 			statement.setInt(1,entry.getId());
-			statement.setString(2,entry.getPassword());
 			rs = statement.executeQuery();
 			
 			if (rs!=null && rs.next()) {
