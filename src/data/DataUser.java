@@ -80,13 +80,14 @@ public class DataUser {
 	public boolean add(User newUser) throws SQLException {
 		PreparedStatement addStmt = null;
 		boolean addConfirmation = false;
+		BasicPasswordEncryptor bpe = new BasicPasswordEncryptor();
 	try {
 		 if(userExists(newUser) || newUser.getPassword().isBlank()){
 			addConfirmation = false;
 		 } else {
 			 addStmt = DbConnector.getInstance().getConn().prepareStatement("insert into user (id,password) values (?,?)");
 			 addStmt.setInt(1, newUser.getId());
-			 addStmt.setString(2, newUser.getPassword());
+			 addStmt.setString(2, bpe.encryptPassword(newUser.getPassword()));
 			 
 			addStmt.executeUpdate();
 			addConfirmation = true;
