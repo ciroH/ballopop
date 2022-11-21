@@ -1,15 +1,15 @@
 package data;
 
 import java.sql.*;
-
+import dev.ciroh.Credentials;
 public class DbConnector {
 	private static DbConnector instance;
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String host = "localhost";
-	private String port = "3306";
-	private String user= "ballopop-admin";
-	private String password = "xifR2Hkdu3fD42HDg";
-	private String db = "ballopop";
+	private String host = Credentials.HOST ;
+	private String port = Credentials.PORT;
+	private String user= Credentials.USER;
+	private String password = Credentials.PASSWORD;
+	private String db = Credentials.DB;
 	private int connected = 0;
 	private Connection conn = null;
 	
@@ -17,7 +17,6 @@ public class DbConnector {
 		try {
 			Class.forName(driver);
 		}catch (ClassNotFoundException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
