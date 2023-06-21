@@ -135,7 +135,7 @@ public class DataCandidate {
 	}
 	
 	public boolean candidateExists(Candidate entry) throws SQLException { //returns true if candidate with the same name as entry.getName() exists in database
-		boolean response;
+		boolean exists;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
@@ -144,9 +144,9 @@ public class DataCandidate {
 			rs = statement.executeQuery();
 			
 			if (rs!=null && rs.next()) {
-				response = true;
+				exists = true;
 			} else {
-				response = false;
+				exists = false;
 			}
 			
 		} catch (SQLException e) {
@@ -164,7 +164,7 @@ public class DataCandidate {
 				throw e2;
 			}
 		}		
-	return response;
+	return exists;
 	}
 	
 	public boolean modify(Candidate candidate) throws SQLException { 
